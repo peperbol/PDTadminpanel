@@ -2,7 +2,8 @@
   app.AppModule =
     ng.core.NgModule({
       imports: [ ng.platformBrowser.BrowserModule, ng.material.MaterialModule ],
-      declarations: [ app.AppComponent ],
+      declarations: [ app.AppComponent],
+      providers: [ app.ApiService],
       bootstrap: [ app.AppComponent ]
     })
     .Class({

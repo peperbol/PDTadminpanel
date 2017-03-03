@@ -5,6 +5,17 @@
       templateUrl: 'views/main.html'
     })
     .Class({
-      constructor: function() {}
+      constructor: [
+        app.ApiService,
+        function(ApiService) {
+          var me = this;
+          this.api = ApiService;
+          this.data = {};
+          this.api.getData().then(function(d){ me.data  = d});
+        }
+      ],
+      stringify: function(object){
+        return JSON.stringify(object);
+      }
     });
 })(window.app || (window.app = {}));
