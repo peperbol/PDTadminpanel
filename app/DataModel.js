@@ -1,5 +1,19 @@
 (function(app) {
   app.Data = {
+    newProgram:function(name, gradname,years){
+      return {
+        "program":name,
+        "graduationprogram":gradname,
+        "years":years
+      }
+    },
+    copyProgram:function(p){
+      return {
+        "program":p.program,
+        "graduationprogram":p.graduationprogram,
+        "years":p.years
+      }
+    },
     newYear: function(num = 1){
       return {
         "order": num,

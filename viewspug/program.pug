@@ -1,0 +1,9 @@
+.name
+  md-input-container
+    md-placeholder Studierichting
+    input(type="text", mdInput, "[(ngModel)]"="data.program")
+  md-input-container
+    md-placeholder Afstudeerrichting
+    input(type="text", mdInput, "[(ngModel)]"="data.graduationprogram")
+p {{data.program}}
+button(md-raised-button, color="accent" "(click)"="saveProgram()" ) Opslaan

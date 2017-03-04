@@ -1,7 +1,7 @@
 (function(app) {
   app.AppComponent =
     ng.core.Component({
-      selector: 'my-app',
+      selector: 'body',
       templateUrl: 'views/main.html'
     })
     .Class({
@@ -10,7 +10,7 @@
         function(ApiService) {
           var me = this;
           this.api = ApiService;
-          this.data = {};
+          this.data = [];
           this.loadData();
         }
       ],

@@ -6,7 +6,7 @@ var autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('html', function(){
   return gulp.src('viewspug/*.pug')
-    .pipe(pug())
+    .pipe(pug().on('error', function(){}))
     .pipe(gulp.dest('views'))
 });
 

@@ -25,22 +25,29 @@
                 console.log(error);
               });
       },
-      newProgram: function(name,gradname, years){
+      newProgram: function(program){
         return this.http.post(this.apiUrl + "classes/" + this.progamsclass,
-        {
-          "program":name,
-          "graduationprogram":gradname,
-          "years":years
-        },
+        program,
         this.headers)
               .toPromise()
               .then(function( dataresult ) {
-                return dataresult.json().result;
+                return dataresult.json().objectId;
+              })
+              .catch(function( error ) {
+                console.log(error);
+              });
+      },
+      updateProgram: function(id,program){
+        return this.http.put(this.apiUrl + "classes/" + this.progamsclass + id,
+        program,
+        this.headers)
+              .toPromise()
+              .then(function( dataresult ) {
+                return id;
               })
               .catch(function( error ) {
                 console.log(error);
               });
       }
-
     });
 })(window.app || (window.app = {}));
