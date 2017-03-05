@@ -1,5 +1,2 @@
 div {{stringify(data)}}
-button(md-button, "(click)"="addProgram()") new program
-.program(
-  *ngIf="data&&data[0]"
-  "[data]"="data[0]")
+.programloader("[data]"="data")

@@ -1,14 +1,28 @@
 .mat-input-placeholder-wrapper{
   overflow: visible !important;
 }
-
-.program{
+.programloader{
+  width: 600px;
+  margin: 10px auto;
   >.name{
     display: flex;
     width: 100%;
-    >*{
+    >md-input-container{
       flex-basis: 300px;
       flex-shink: 1;
+      flex-grow: 1;
+      transition: flex-basis 0.2s ease;
     }
+    >.hidden{
+        flex-basis: 0px;
+        flex-grow: 0;
+    }
+  }
+  .renamecontrols{
+    >button{
+      margin-right: 10px;
+    }
+  }
+  .program{
   }
 }
