@@ -1,3 +1,7 @@
 
-p {{data.objectId}}
-button(md-raised-button, color="accent" "(click)"="saveProgram()" ) Opslaan
+//p {{data.objectId}}
+
+.year(*ngFor="let year of data.years", [data]="year")
+.buttonrow
+  button(md-raised-button, color="accent" "(click)"="newYear()" ) Nieuw Studiejaar
+  button.right(md-raised-button, color="accent", [disabled]="isDirty()", "(click)"="saveProgram()" ) Opslaan

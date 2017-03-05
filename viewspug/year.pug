@@ -1,0 +1,8 @@
+md-card
+  md-card-header
+    md-card-title Year {{data.order}}
+
+  .course(*ngFor="let course of data.courses", [data]="course")
+  .buttonrow
+    button(md-raised-button, color="accent" "(click)"="newCourse()" ) Nieuw Opleidingsonderdeel
+    md-divider

@@ -9,12 +9,12 @@
 
   md-input-container("[class.hidden]"="!selectedProgramName")
     md-placeholder Afstudeerrichting
-    input(type="text", mdInput,[mdAutocomplete]="grad", [(ngModel)]="selectedGradProgramName", (focusout)="checkProgram()", (input)="checkProgram()")
+    input(type="text", mdInput, [mdAutocomplete]="grad", [(ngModel)]="selectedGradProgramName", (focusout)="checkProgram()", (input)="checkProgram()")
   md-autocomplete(#grad="mdAutocomplete")
     md-option(*ngFor="let programname of getGradProgramNames()", [value]="programname")
       | {{programname}}
 
-.renameControls(*ngIf="enableRenameControls")
-  button(md-raised-button, color="accent" "(click)"="saveProgram()" ) Nieuw Programma
+.renameControls.buttonrow(*ngIf="enableRenameControls")
+  button(md-raised-button, color="accent" "(click)"="addProgram()" ) Nieuw Programma
   button(md-raised-button, color="accent" "(click)"="rename()", *ngIf="selectedProgram") Hernoem Programma
 .program( *ngIf="selectedProgram", [data]="selectedProgram")

@@ -25,7 +25,7 @@
         var me  = this
         new Promise(function(){
           setTimeout(function(){
-            console.log(me.selectedProgramName+" "+me.selectedGradProgramName);
+
             var prog = me.data.filter(function(e){
               return e.program ==me.selectedProgramName && e.graduationprogram == me.selectedGradProgramName
             })
@@ -46,7 +46,9 @@
       },
       addProgram: function(){
         var me = this;
-        var newProgram =app.Data.newProgram(this.selectedProgramName|| "new Program",this.selectedGradProgramName,[app.Data.newYear(1).courses.push(app.Data.newCourse(1))])
+        var newProgram =app.Data.newProgram(this.selectedProgramName|| "new Program",this.selectedGradProgramName,[
+          app.Data.newYear(1)
+        ])
         this.api.newProgram( newProgram).then(
           function(id){
             newProgram.objectId = id;

@@ -18,11 +18,41 @@
         flex-grow: 0;
     }
   }
-  .renamecontrols{
+  .buttonrow{
+    margin-bottom: 10px;
     >button{
       margin-right: 10px;
     }
+    .right {
+      float: right;
+    }
   }
   .program{
+    .periodelabel{
+      margin-bottom: 0;
+      color: rgba(0,0,0,.38);
+    }
+    .periode{
+      height: 42px;
+      position: relative;
+      >*{
+        position: absolute;
+      }
+    }
   }
+  md-card {
+    margin-bottom: 10px;
+  }
+  .fullwidth{
+    width: 100%;
+  }
+  .halfwidth{
+    width: 50%;
+    box-sizing: border-box;
+    display: inline-block;
+    &:nth-child(2n){
+      padding-left: 10px;
+    }
+  }
+
 }

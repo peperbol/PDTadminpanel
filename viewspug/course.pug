@@ -1,0 +1,20 @@
+md-card
+  //| id = {{data.id}}
+  h3
+    md-input-container
+      md-placeholder Name
+      input(type="text", mdInput,  [(ngModel)]="data.name").fullwidth
+  p.periodelabel Periode
+  div.periode
+    md-slider( min="0", max="4", step="1", [ngModel]="startperiode",(ngModelChange)="changeStart($event)").fullwidth
+    md-slider( invert min="0", max="4", step="1", [ngModel]="endperiode",(ngModelChange)="changeEnd($event)").fullwidth
+  div
+    md-input-container.halfwidth
+      md-placeholder Studiepunten
+      input(type="number", mdInput,  [(ngModel)]="data.studypoints")
+    md-slide-toggle([(ngModel)]="data.graduationyear").halfwidth Verplicht in afstudeerjaar
+
+  div
+    md-input-container
+      md-placeholder ECT fiche Url
+      input(type="text", mdInput,  [(ngModel)]="data.url")
