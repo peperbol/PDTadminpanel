@@ -3,19 +3,26 @@
     ng.core.Component({
       selector: '.course',
       templateUrl: 'views/course.html',
-      inputs: ["data"]
+      inputs: ["data", "order", "first", "last", "lastYear"],
+      outputs:["moveUp","moveDown", "delete"]
     })
     .Class({
       constructor: function() {
         var me = this;
           this.endperiode = 1;
           this.startperiode = 0;
+          this.moveUp = new ng.core.EventEmitter();
+          this.moveDown = new ng.core.EventEmitter();
+          this.delete = new ng.core.EventEmitter();
+
           new Promise(function(){
             setTimeout(function(){
               me.startperiode= me.data.start-1;
               me.endperiode= 5- (me.data.start+me.data.duration);
             },1000);
           });
+
+
       },
       changeEnd: function(e){
         var me = this;
@@ -57,7 +64,15 @@
             console.log("hi");
         });
         }
+      },
+      moveUpF: function(){
+        this.moveUp.emit(this.order);
+      },
+      moveDownF: function(){
+        this.moveDown.emit(this.order);
+      },
+      deleteF: function(){
+        this.delete.emit(this.order);
       }
-
     });
 })(window.app || (window.app = {}));

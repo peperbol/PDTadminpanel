@@ -23,7 +23,7 @@
     newCourse: function(id = 1){
       return {
         "id":1,
-        "name":"newCourse",
+        "name":"",
         "prerequisites":[],
         "equalrequisites":[],
         "graduationyear":false,

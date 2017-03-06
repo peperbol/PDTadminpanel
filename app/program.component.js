@@ -17,24 +17,39 @@
       ],
       saveProgram:function(){
         var me = this;
-        this.api.updateProgram(this.data.objectId, app.Data.copyProgram(this.data)).then(function(){
-          me.cache = JSON.stringify(this.data);
-          me.snackBar.open("Saved","", {
-            duration: 1500,
-          });
+        this.api.updateProgram(this.data.objectId, app.Data.copyProgram(this.data)).then(function(success){
+          if(success){
+            me.setCache();
+            me.snackBar.open("Saved","", {
+              duration: 1500,
+            });
+          } else{
+            me.snackBar.open("Failed to Save","", {
+              duration: 1500,
+            });
+          }
         })
-
-
-
       },
-      newYear(){
+      newYear: function(){
+        this.data.years.forEach(function(y){y.courses.forEach(function(c){c.graduationyear = false;})})
         this.data.years.push(app.Data.newYear(this.data.years.length+1));
       },
-      isDirty(){
+      setCache: function(){
+        var cache = JSON.stringify(app.Data.copyProgram(this.data));
+        this.cache = cache;
+      },
+      isDirty: function(){
         if(!this.cache)
-          this.cache = JSON.stringify(this.data);
+          this.setCache();
 
-        return this.cache == JSON.stringify(this.data);
+        var cache = JSON.stringify(app.Data.copyProgram(this.data));
+
+        return this.cache != cache;
+      },
+      deleteYearAt: function(i){
+
+        this.data.years.slice(i).forEach(function(e){e.order --;});
+        this.data.years.splice(i,1);
       }
 
     });

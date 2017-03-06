@@ -1,7 +1,14 @@
 md-card
   md-card-title
     h2 Jaar {{data.order}}
-
-  .course(*ngFor="let course of data.courses", [data]="course")
+    .yearoptions.options
+      button(md-icon-button, [mdMenuTriggerFor]="menu")
+        md-icon more_vert
+      md-menu( #menu="mdMenu")
+        button(md-menu-item, (click)="deleteYear()")
+          md-icon delete
+          span Verwijder
+  .course(*ngFor="let course of data.courses; let i = index;  let f = first; let l = last",
+        [data]="course",[order]="i",[first]="f",[last]="l",(moveUp)="moveUp($event)",(moveDown)="moveDown($event)",(delete)="deleteAt($event)",[lastYear]="lastYear")
   .buttonrow
     button(md-raised-button, color="accent" "(click)"="newCourse()" ).fullwidth Nieuw Opleidingsonderdeel
