@@ -15,7 +15,7 @@
           this.selectedProgramName = "";
           this.selectedGradProgramName = "";
           this.enableRenameControls = false;
-          //this.programNameControl = new ng.forms.FormControl();
+          this.grad = new ng.forms.FormControl();
           //this.gradProgramNameControl = new ng.forms.FormControl();
           //this.programNameControl.valueChanges.forEach(this.checkProgram);
           //this.gradProgramNameControl.valueChanges.forEach(this.checkProgram);
@@ -23,6 +23,7 @@
       ],
       checkProgram: function(value){
         var me  = this
+        console.log(this.grad.value);
         new Promise(function(){
           setTimeout(function(){
 

@@ -22,7 +22,7 @@
     },
     newCourse: function(id = 1){
       return {
-        "id":1,
+        "id":id,
         "name":"",
         "prerequisites":[],
         "equalrequisites":[],

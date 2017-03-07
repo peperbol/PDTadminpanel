@@ -3,7 +3,7 @@
   md-input-container
     md-placeholder Studierichting
     input(type="text", mdInput,  [mdAutocomplete]="program", [(ngModel)]="selectedProgramName", (focusout)="checkProgram()", (input)="checkProgram()")
-  md-autocomplete(#program="mdAutocomplete", (change)= "checkProgram()")
+  md-autocomplete(#program="mdAutocomplete")
     md-option(*ngFor="let programname of getProgramNames()", [value]="programname")
       | {{programname}}
 

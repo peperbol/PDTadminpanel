@@ -1,7 +1,10 @@
 
 //p {{data.objectId}}
 
-.year(*ngFor="let year of data.years; let ly = last", [data]="year", (delete)="deleteYearAt($event)", [lastYear]="ly")
+button.sidesave(md-icon-button, *ngIf="!isDirty()", "(click)"="saveProgram()" )
+  md-icon save
+
+.year(*ngFor="let year of data.years; let ly = last", [data]="year", (delete)="deleteYearAt($event)", [lastYear]="ly", [program]="this")
 .buttonrow
   button(md-raised-button, color="accent" "(click)"="newYear()" ) Nieuw Studiejaar
   button.right(md-raised-button, color="accent", [disabled]="!isDirty()", "(click)"="saveProgram()" ) Opslaan

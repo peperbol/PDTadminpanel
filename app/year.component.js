@@ -3,7 +3,7 @@
     ng.core.Component({
       selector: '.year',
       templateUrl: 'views/year.html',
-      inputs: ["data", "lastYear"],
+      inputs: ["data", "lastYear", "program","nextId"],
       outputs:["delete"]
     })
     .Class({
@@ -13,7 +13,7 @@
         }
       ],
       newCourse:function(){
-        this.data.courses.push(app.Data.newCourse());
+        this.data.courses.push(app.Data.newCourse(this.program.newId()));
       },
       moveUp: function(i){
         this.data.courses.splice(i-1, 0,this.data.courses.splice(i,1)[0]);

@@ -50,7 +50,19 @@
 
         this.data.years.slice(i).forEach(function(e){e.order --;});
         this.data.years.splice(i,1);
+      },
+      newId(){
+        var ids = this.data.years
+         .reduce(function(arr,val){return arr.concat(val.courses)},[])
+         .map(function(e){return e.id});
+        var newId;
+        do {
+          newId = Math.floor(Math.random()*1000000);
+        } while (ids.includes(newId))
+        return newId;
+      },
+      getCoursesOfYear(i){
+        return this.data.years[i-1].courses;
       }
-
     });
 })(window.app || (window.app = {}));

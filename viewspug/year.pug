@@ -9,6 +9,6 @@ md-card
           md-icon delete
           span Verwijder
   .course(*ngFor="let course of data.courses; let i = index;  let f = first; let l = last",
-        [data]="course",[order]="i",[first]="f",[last]="l",(moveUp)="moveUp($event)",(moveDown)="moveDown($event)",(delete)="deleteAt($event)",[lastYear]="lastYear")
+        [data]="course",[order]="i",[first]="f",[last]="l",(moveUp)="moveUp($event)",(moveDown)="moveDown($event)",(delete)="deleteAt($event)",[lastYear]="lastYear", [program]="program", [yearOrder]="data.order")
   .buttonrow
     button(md-raised-button, color="accent" "(click)"="newCourse()" ).fullwidth Nieuw Opleidingsonderdeel

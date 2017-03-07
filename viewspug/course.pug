@@ -17,6 +17,7 @@ md-card
     md-input-container.fullwidth
       md-placeholder Naam
       input(type="text", mdInput,  [(ngModel)]="data.name")
+
   p.periodelabel Periode
   div.periode
     md-slider( min="0", max="4", step="1", [ngModel]="startperiode",(ngModelChange)="changeStart($event)").fullwidth
@@ -31,3 +32,27 @@ md-card
     md-input-container.fullwidth
       md-placeholder ECT fiche Url
       input(type="text", mdInput,  [(ngModel)]="data.url")
+  div.requisites
+    p Gelijktijdigheden
+    md-chip-list
+      md-chip(*ngFor="let courseId of data.equalrequisites", (click)="removeEqualRequisite(courseId)" ) {{getEqualRequisite(courseId).name}}
+    div
+      md-input-container
+        md-placeholder Toevoegen
+        input(type="text", mdInput,  [mdAutocomplete]="searchEqualRequisitesAC", [(ngModel)]="searchEqualRequisites")
+      md-autocomplete(#searchEqualRequisitesAC="mdAutocomplete")
+        md-option(*ngFor="let course of filteredPossibleAddableEqualRequisites()", [value]="course.name")
+          | {{course.name}}
+      button(md-raised-button, color="accent" "(click)"="addEqualRequisite()", [disabled]="!getTypedEqualRequisite()") Toevoegen
+  div(*ngIf="yearOrder>1").requisites
+    p Volgtijdigheden
+    md-chip-list
+      md-chip(*ngFor="let courseId of data.prerequisites", (click)="removePreRequisite(courseId)" color="warn") {{getPreRequisite(courseId).name}}
+    div
+      md-input-container
+        md-placeholder Toevoegen
+        input(type="text", mdInput,  [mdAutocomplete]="searchPreRequisitesAC", [(ngModel)]="searchPreRequisites")
+      md-autocomplete(#searchPreRequisitesAC="mdAutocomplete")
+        md-option(*ngFor="let course of filteredPossibleAddablePreRequisites()", [value]="course.name")
+          | {{course.name}}
+      button(md-raised-button, color="accent" "(click)"="addPreRequisite()", [disabled]="!getTypedPreRequisite()") Toevoegen
