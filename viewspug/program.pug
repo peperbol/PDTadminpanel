@@ -1,7 +1,7 @@
 
 //p {{data.objectId}}
 
-button.sidesave(md-icon-button, *ngIf="!isDirty()", "(click)"="saveProgram()" )
+button.sidesave(md-mini-fab, *ngIf="isDirty()", "(click)"="saveProgram()", [style.top.px]="pageScroll")
   md-icon save
 
 .year(*ngFor="let year of data.years; let ly = last", [data]="year", (delete)="deleteYearAt($event)", [lastYear]="ly", [program]="this")

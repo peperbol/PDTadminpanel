@@ -1,58 +1,64 @@
 md-card
   //| id = {{data.id}}
-  .courseoptions.options
-    button(md-icon-button, [mdMenuTriggerFor]="menu")
-      md-icon more_vert
-    md-menu( #menu="mdMenu")
-      button(md-menu-item, *ngIf="!first", (click)="moveUpF()")
-        md-icon keyboard_arrow_up
-        span Omhoog
-      button(md-menu-item, *ngIf="!last", (click)="moveDownF()")
-        md-icon keyboard_arrow_down
-        span Omlaag
-      button(md-menu-item, (click)="deleteF()")
-        md-icon delete
-        span Verwijder
-  h3
+
+  h3([class.closedcourse]="!open")
+    button(md-icon-button (click)="open = !open")
+      md-icon(*ngIf="!open") add
+      md-icon(*ngIf="open") remove
+
     md-input-container.fullwidth
       md-placeholder Naam
       input(type="text", mdInput,  [(ngModel)]="data.name")
+    .courseoptions.options
+      button(md-icon-button, [mdMenuTriggerFor]="menu")
+        md-icon more_vert
+        md-menu( #menu="mdMenu")
+          button(md-menu-item, *ngIf="!first", (click)="moveUpF()")
+            md-icon keyboard_arrow_up
+            span Omhoog
+          button(md-menu-item, *ngIf="!last", (click)="moveDownF()")
+            md-icon keyboard_arrow_down
+            span Omlaag
+          button(md-menu-item, (click)="deleteF()")
+            md-icon delete
+            span Verwijder
 
-  p.periodelabel Periode
-  div.periode
-    md-slider( min="0", max="4", step="1", [ngModel]="startperiode",(ngModelChange)="changeStart($event)").fullwidth
-    md-slider( invert min="0", max="4", step="1", [ngModel]="endperiode",(ngModelChange)="changeEnd($event)").fullwidth
-  div
-    md-input-container.halfwidth
-      md-placeholder Studiepunten
-      input(type="number", mdInput,  [(ngModel)]="data.studypoints")
-    md-slide-toggle([(ngModel)]="data.graduationyear", *ngIf="lastYear").halfwidth Verplicht in afstudeerjaar
+  div(*ngIf="open")
+    p.periodelabel Periode
+    div.periode
+      md-slider( min="0", max="4", step="1", [ngModel]="startperiode",(ngModelChange)="changeStart($event)").fullwidth
+      md-slider( invert min="0", max="4", step="1", [ngModel]="endperiode",(ngModelChange)="changeEnd($event)").fullwidth
+    div
+      md-input-container.halfwidth
+        md-placeholder Studiepunten
+        input(type="number", mdInput,  [(ngModel)]="data.studypoints")
+        md-slide-toggle([(ngModel)]="data.graduationyear", *ngIf="lastYear").halfwidth Verplicht in afstudeerjaar
 
-  div
-    md-input-container.fullwidth
-      md-placeholder ECT fiche Url
-      input(type="text", mdInput,  [(ngModel)]="data.url")
-  div.requisites
-    p Gelijktijdigheden
-    md-chip-list
-      md-chip(*ngFor="let courseId of data.equalrequisites", (click)="removeEqualRequisite(courseId)" ) {{getEqualRequisite(courseId).name}}
     div
-      md-input-container
-        md-placeholder Toevoegen
-        input(type="text", mdInput,  [mdAutocomplete]="searchEqualRequisitesAC", [(ngModel)]="searchEqualRequisites")
-      md-autocomplete(#searchEqualRequisitesAC="mdAutocomplete")
-        md-option(*ngFor="let course of filteredPossibleAddableEqualRequisites()", [value]="course.name")
-          | {{course.name}}
-      button(md-raised-button, color="accent" "(click)"="addEqualRequisite()", [disabled]="!getTypedEqualRequisite()") Toevoegen
-  div(*ngIf="yearOrder>1").requisites
-    p Volgtijdigheden
-    md-chip-list
-      md-chip(*ngFor="let courseId of data.prerequisites", (click)="removePreRequisite(courseId)" color="warn") {{getPreRequisite(courseId).name}}
-    div
-      md-input-container
-        md-placeholder Toevoegen
-        input(type="text", mdInput,  [mdAutocomplete]="searchPreRequisitesAC", [(ngModel)]="searchPreRequisites")
-      md-autocomplete(#searchPreRequisitesAC="mdAutocomplete")
-        md-option(*ngFor="let course of filteredPossibleAddablePreRequisites()", [value]="course.name")
-          | {{course.name}}
-      button(md-raised-button, color="accent" "(click)"="addPreRequisite()", [disabled]="!getTypedPreRequisite()") Toevoegen
+      md-input-container.fullwidth
+        md-placeholder ECT fiche Url
+        input(type="text", mdInput,  [(ngModel)]="data.url")
+    div.requisites
+      p Gelijktijdigheden
+      md-chip-list
+        md-chip(*ngFor="let courseId of data.equalrequisites", (click)="removeEqualRequisite(courseId)" ) {{getEqualRequisite(courseId).name}}
+        div
+          md-input-container
+            md-placeholder Toevoegen
+            input(type="text", mdInput,  [mdAutocomplete]="searchEqualRequisitesAC", [(ngModel)]="searchEqualRequisites")
+            md-autocomplete(#searchEqualRequisitesAC="mdAutocomplete")
+              md-option(*ngFor="let course of filteredPossibleAddableEqualRequisites()", [value]="course.name")
+                | {{course.name}}
+                button(md-raised-button, color="accent" "(click)"="addEqualRequisite()", [disabled]="!getTypedEqualRequisite()") Toevoegen
+    div(*ngIf="yearOrder>1").requisites
+      p Volgtijdigheden
+      md-chip-list
+        md-chip(*ngFor="let courseId of data.prerequisites", (click)="removePreRequisite(courseId)" color="warn") {{getPreRequisite(courseId).name}}
+        div
+          md-input-container
+            md-placeholder Toevoegen
+            input(type="text", mdInput,  [mdAutocomplete]="searchPreRequisitesAC", [(ngModel)]="searchPreRequisites")
+            md-autocomplete(#searchPreRequisitesAC="mdAutocomplete")
+              md-option(*ngFor="let course of filteredPossibleAddablePreRequisites()", [value]="course.name")
+                | {{course.name}}
+                button(md-raised-button, color="accent" "(click)"="addPreRequisite()", [disabled]="!getTypedPreRequisite()") Toevoegen

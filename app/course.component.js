@@ -13,6 +13,7 @@
           this.startperiode = 0;
           this.searchEqualRequisites = "";
           this.searchPreRequisites = "";
+          this.open = false;
           this.moveUp = new ng.core.EventEmitter();
           this.moveDown = new ng.core.EventEmitter();
           this.delete = new ng.core.EventEmitter();

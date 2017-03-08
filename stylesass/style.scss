@@ -35,8 +35,9 @@
       margin-bottom: 30px;
       position: relative;
       .sidesave{
-        position: fixed;
-        right: 50px;
+        position: absolute;
+        right: -50px;
+        transition: top 0.1s;
       }
       .year{
         >md-card{
@@ -55,6 +56,33 @@
             }
 
           }
+          h3{
+            >*{
+              float:left;
+            }
+            >button{
+              margin-right: 10px;
+              margin-top: 10px;
+            }
+            md-input-container{
+              width: calc(100% - 100px);
+            }
+            &.closedcourse{
+              margin-bottom: -20px;
+              margin-top: -10px;
+
+              .options{
+                top: 14px;
+              }
+            }
+            &::after{
+              content: '';
+              display: table;
+              clear:both;
+            }
+          }
+
+
           .periodelabel{
             margin-bottom: 0;
             color: rgba(0,0,0,.38);
@@ -66,21 +94,7 @@
               position: absolute;
             }
           }
-          .options{
-            width: 40px;
-            height: 40px;
-            position: absolute;
-            z-index: 1;
-            &.courseoptions{
-              top: 24px;
-              right: 16px;
-            }
-            &.yearoptions{
-              top: 15px;
-              right: 16px;
-              color:white;
-            }
-          }
+
           .requisites{
             p{
               font-family: 'Roboto', sans-serif;
@@ -105,6 +119,21 @@
               }
             }
 
+          }
+        }
+        .options{
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          z-index: 1;
+          &.courseoptions{
+            top: 24px;
+            right: 16px;
+          }
+          &.yearoptions{
+            top: 15px;
+            right: 16px;
+            color:white;
           }
         }
       }

@@ -9,12 +9,20 @@
       constructor: [
         app.ApiService,
         ng.material.MdSnackBar,
-        function(ApiService,MdSnackBar) {
+        ng.core.Renderer,
+        ng.core.NgZone,
+        function(ApiService,MdSnackBar,renderer, ngZone) {
+          var me= this;
           this.api = ApiService;
           this.snackBar = MdSnackBar;
+          this.pageScroll = 0;
+          renderer.listenGlobal('window', 'scroll', function(e){ngZone.run(function(){me.onScroll(e)})});
         }
 
       ],
+      onScroll(event){
+        this.pageScroll = event.currentTarget.scrollY;
+      },
       saveProgram:function(){
         var me = this;
         this.api.updateProgram(this.data.objectId, app.Data.copyProgram(this.data)).then(function(success){
