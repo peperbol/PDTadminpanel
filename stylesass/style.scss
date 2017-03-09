@@ -67,6 +67,12 @@
             md-input-container{
               width: calc(100% - 100px);
             }
+
+            transition: margin-bottom 0.2s, margin-top 0.2s;
+
+            .options{
+              transition: top 0.2s;
+            }
             &.closedcourse{
               margin-bottom: -20px;
               margin-top: -10px;
@@ -81,7 +87,6 @@
               clear:both;
             }
           }
-
 
           .periodelabel{
             margin-bottom: 0;
