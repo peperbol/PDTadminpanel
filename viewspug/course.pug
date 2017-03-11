@@ -49,7 +49,7 @@ md-card
             md-autocomplete(#searchEqualRequisitesAC="mdAutocomplete")
               md-option(*ngFor="let course of filteredPossibleAddableEqualRequisites()", [value]="course.name")
                 | {{course.name}}
-                button(md-raised-button, color="accent" "(click)"="addEqualRequisite()", [disabled]="!getTypedEqualRequisite()") Toevoegen
+          button(md-raised-button, color="accent" "(click)"="addEqualRequisite()", [disabled]="!getTypedEqualRequisite()") Toevoegen
     div(*ngIf="yearOrder>1").requisites
       p Volgtijdigheden
       md-chip-list
@@ -61,4 +61,4 @@ md-card
             md-autocomplete(#searchPreRequisitesAC="mdAutocomplete")
               md-option(*ngFor="let course of filteredPossibleAddablePreRequisites()", [value]="course.name")
                 | {{course.name}}
-                button(md-raised-button, color="accent" "(click)"="addPreRequisite()", [disabled]="!getTypedPreRequisite()") Toevoegen
+          button(md-raised-button, color="accent" "(click)"="addPreRequisite()", [disabled]="!getTypedPreRequisite()") Toevoegen
