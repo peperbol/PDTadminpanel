@@ -1,0 +1,8 @@
+md-input-container.fullwidth
+  md-placeholder Naam
+  input(type="text", mdInput,  [(ngModel)]="name")
+md-input-container.fullwidth
+  md-placeholder Wachtwoord
+  input(type="password", mdInput,  [(ngModel)]="pass")
+button(md-raised-button, color="accent", (click)="login()") Login
+  

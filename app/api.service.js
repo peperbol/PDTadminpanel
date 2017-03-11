@@ -12,8 +12,28 @@
           this.headers = {headers: new ng.http.Headers()};
           this.headers.headers.append("X-Parse-Application-Id","PDT");
           this.headers.headers.append("Content-Type","application/json");
+          this.username = "";
+          this.pass = "";
+          this.validAuth = false;
+          this.sessionToken= "";
         }
       ],
+      login(username, pass){
+        var me = this;
+        return this.http.get(this.apiUrl + "login?username=" + username+ "&password="+pass, this.headers)
+              .toPromise()
+              .then(function( dataresult ) {
+                  me.validAuth = true;
+                  me.username = username;
+                  me.pass = pass;
+                  me.sessiontoken = dataresult.json().sessionToken;
+                  me.headers.headers.append("X-Parse-Session-Token",me.sessiontoken);
+                  return false;
+              })
+              .catch(function( error ) {
+                return error.json().error;
+              });
+      },
       getAllPrograms: function(){
         return this.http.get(this.apiUrl + "classes/" + this.progamsclass, this.headers)
               .toPromise()

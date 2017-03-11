@@ -1,6 +1,16 @@
-@import 'material.scss';
+
 .mat-input-placeholder-wrapper{
   overflow: visible !important;
+}
+.login{
+  width: 300px;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%,-50%);
+  >*{
+    width: 100%;
+  }
 }
 .programloader{
   width: 600px;
@@ -15,8 +25,8 @@
       transition: flex-basis 0.2s ease;
     }
     >.hidden{
-        flex-basis: 0px;
-        flex-grow: 0;
+      flex-basis: 0px;
+      flex-grow: 0;
     }
   }
   .buttonrow{
@@ -29,131 +39,130 @@
     }
   }
 
-    $primary: map-get($theme, primary);
 
-    .program{
-      margin-bottom: 30px;
-      position: relative;
-      .sidesave{
-        position: absolute;
-        right: -50px;
-        transition: top 0.1s;
-      }
-      .year{
-        >md-card{
-          padding-top: 0px;
-          >md-card-title{
-              background-color: #673ab7;
-              margin: 0 -24px;
-              padding: 12px 24px;
-              margin-bottom: 16px;
-              h2{
-                margin: 0;
-                font-family: 'Roboto', sans-serif;
-                font-weight: normal;
-                color: white;
-              }
-            }
-
-          }
-          h3{
-            >*{
-              float:left;
-            }
-            >button{
-              margin-right: 10px;
-              margin-top: 10px;
-            }
-            md-input-container{
-              width: calc(100% - 100px);
-            }
-
-            transition: margin-bottom 0.2s, margin-top 0.2s;
-
-            .options{
-              transition: top 0.2s;
-            }
-            &.closedcourse{
-              margin-bottom: -20px;
-              margin-top: -10px;
-
-              .options{
-                top: 14px;
-              }
-            }
-            &::after{
-              content: '';
-              display: table;
-              clear:both;
-            }
-          }
-
-          .periodelabel{
-            margin-bottom: 0;
-            color: rgba(0,0,0,.38);
-          }
-          .periode{
-            height: 42px;
-            position: relative;
-            >*{
-              position: absolute;
-            }
-          }
-
-          .requisites{
-            p{
-              font-family: 'Roboto', sans-serif;
-              margin-top: 10px;
-              margin-bottom: 5px;
-            }
-            md-input-container{
-              width: 80%;
-            }
-            button{
-              margin-left: 5px;
-              box-sizing: border-box;
-              width: calc(20% - 5px);
-            }
-            md-chip{
-              margin-bottom: 5px;
-              margin-right: 5px;
-              cursor: pointer;
-
-              &:hover{
-                background-color: #ffb5af;
-              }
-            }
-
+  .program{
+    margin-bottom: 30px;
+    position: relative;
+    .sidesave{
+      position: absolute;
+      right: -50px;
+      transition: top 0.1s;
+    }
+    .year{
+      >md-card{
+        padding-top: 0px;
+        >md-card-title{
+          background-color: #673ab7;
+          margin: 0 -24px;
+          padding: 12px 24px;
+          margin-bottom: 16px;
+          h2{
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: normal;
+            color: white;
           }
         }
+
+      }
+      h3{
+        >*{
+          float:left;
+        }
+        >button{
+          margin-right: 10px;
+          margin-top: 10px;
+        }
+        md-input-container{
+          width: calc(100% - 100px);
+        }
+
+        transition: margin-bottom 0.2s, margin-top 0.2s;
+
         .options{
-          width: 40px;
-          height: 40px;
+          transition: top 0.2s;
+        }
+        &.closedcourse{
+          margin-bottom: -20px;
+          margin-top: -10px;
+
+          .options{
+            top: 14px;
+          }
+        }
+        &::after{
+          content: '';
+          display: table;
+          clear:both;
+        }
+      }
+
+      .periodelabel{
+        margin-bottom: 0;
+        color: rgba(0,0,0,.38);
+      }
+      .periode{
+        height: 42px;
+        position: relative;
+        >*{
           position: absolute;
-          z-index: 1;
-          &.courseoptions{
-            top: 24px;
-            right: 16px;
-          }
-          &.yearoptions{
-            top: 15px;
-            right: 16px;
-            color:white;
-          }
         }
       }
-      md-card {
-        margin-bottom: 10px;
-      }
-      .fullwidth{
-        width: 100%;
-      }
-      .halfwidth{
-        width: 50%;
-        box-sizing: border-box;
-        display: inline-block;
-        &:nth-child(2n){
-          padding-left: 10px;
+
+      .requisites{
+        p{
+          font-family: 'Roboto', sans-serif;
+          margin-top: 10px;
+          margin-bottom: 5px;
         }
+        md-input-container{
+          width: 80%;
+        }
+        button{
+          margin-left: 5px;
+          box-sizing: border-box;
+          width: calc(20% - 5px);
+        }
+        md-chip{
+          margin-bottom: 5px;
+          margin-right: 5px;
+          cursor: pointer;
+
+          &:hover{
+            background-color: #ffb5af;
+          }
+        }
+
       }
+    }
+    .options{
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      z-index: 1;
+      &.courseoptions{
+        top: 24px;
+        right: 16px;
+      }
+      &.yearoptions{
+        top: 15px;
+        right: 16px;
+        color:white;
+      }
+    }
+  }
+  md-card {
+    margin-bottom: 10px;
+  }
+  .fullwidth{
+    width: 100%;
+  }
+  .halfwidth{
+    width: 50%;
+    box-sizing: border-box;
+    display: inline-block;
+    &:nth-child(2n){
+      padding-left: 10px;
+    }
+  }
 }

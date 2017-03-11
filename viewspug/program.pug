@@ -6,5 +6,5 @@ button.sidesave(md-mini-fab, *ngIf="isDirty()", "(click)"="saveProgram()", [styl
 
 .year(*ngFor="let year of data.years; let ly = last", [data]="year", (delete)="deleteYearAt($event)", [lastYear]="ly", [program]="this")
 .buttonrow
-  button(md-raised-button, color="accent" "(click)"="newYear()" ) Nieuw Studiejaar
-  button.right(md-raised-button, color="accent", [disabled]="!isDirty()", "(click)"="saveProgram()" ) Opslaan
+  button(md-raised-button, color="accent", (click)="newYear()" ) Nieuw Studiejaar
+  button.right(md-raised-button, color="accent", [disabled]="!isDirty()", (click)="saveProgram()" ) Opslaan

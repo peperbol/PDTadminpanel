@@ -33,7 +33,7 @@
             });
           } else{
             me.snackBar.open("Failed to Save","", {
-              duration: 1500,
+              duration: 3000,
             });
           }
         })
