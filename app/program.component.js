@@ -38,6 +38,19 @@
           }
         })
       },
+      removeRequisites(id){
+        removeFrom = function(arr){
+          var i;
+          while((i= arr.indexOf(id))>=0){
+            arr.splice(i,1);
+          }
+        }
+
+        this.data.years.forEach(function(year){year.courses.forEach(function(course){
+          removeFrom(course.prerequisites);
+          removeFrom(course.equalrequisites);
+        })});
+      },
       newYear: function(){
         this.data.years.forEach(function(y){y.courses.forEach(function(c){c.graduationyear = false;})})
         this.data.years.push(app.Data.newYear(this.data.years.length+1));

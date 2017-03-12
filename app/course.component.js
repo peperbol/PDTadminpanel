@@ -36,9 +36,7 @@
           new Promise(function(){
             setTimeout(function(){
               me.endperiode = 4 - Math.max(1,4-e);
-              console.log("hi");
             },1000)
-            console.log("hi");
           });
         }
       },
@@ -71,6 +69,7 @@
         this.moveDown.emit(this.order);
       },
       deleteF(){
+        this.program.removeRequisites(this.data.id)
         this.delete.emit(this.order);
       },
       filterCourses(courses,string){
