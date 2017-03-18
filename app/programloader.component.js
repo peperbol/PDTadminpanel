@@ -15,11 +15,22 @@
           this.selectedProgramName = "";
           this.selectedGradProgramName = "";
           this.enableRenameControls = false;
-          //this.gradProgramNameControl = new ng.forms.FormControl();
-          //this.programNameControl.valueChanges.forEach(this.checkProgram);
-          //this.gradProgramNameControl.valueChanges.forEach(this.checkProgram);
+          this.caches= {};
+
+            this.calcCaches();
         }
       ],
+      ngOnChanges: function(){
+        this.calcCaches();
+      },
+      calcCaches: function(){
+        console.log(this.data);
+        if(this.data)
+        for (var i = 0; i < this.data.length; i++) {
+
+          this.caches[this.data[i].objectId]= {'cache':JSON.stringify(app.Data.copyProgram(this.data[i]))};
+        }
+      },
       checkProgram: function(value){
         var me  = this
         new Promise(function(){
@@ -31,9 +42,10 @@
             if(prog.length> 0) {
               me.selectedProgram = prog[0];
               me.enableRenameControls = false;
-            } else if(me.selectedProgramName) {
+            } else if(me.selectedProgramName && me.selectedGradProgramName) {
               me.enableRenameControls = true;
-            } else{
+            } else {
+              me.selectedProgram = null;
               me.enableRenameControls = false;
             }
 
@@ -82,6 +94,14 @@
         this.selectedProgram.program = this.selectedProgramName;
         this.selectedProgram.graduationprogram = this.selectedGradProgramName;
         this.saveProgram();
+      },
+      deleteProgramFromModel: function(id){
+        this.data.splice(
+        this.data.findIndex(function(e){
+          return e.objectId == id
+        }),1);
+        this.selectedProgram = null;
+        this.selectedGradProgramName = "";
       }
     });
 })(window.app || (window.app = {}));

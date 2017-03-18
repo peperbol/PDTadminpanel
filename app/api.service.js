@@ -18,7 +18,7 @@
           this.sessionToken= "";
         }
       ],
-      login(username, pass){
+      login: function(username, pass){
         var me = this;
         return this.http.get(this.apiUrl + "login?username=" + username+ "&password="+pass, this.headers)
               .toPromise()
@@ -60,6 +60,17 @@
       updateProgram: function(id,program){
         return this.http.put(this.apiUrl + "classes/" + this.progamsclass + id,
         program,
+        this.headers)
+              .toPromise()
+              .then(function( dataresult ) {
+                return id;
+              })
+              .catch(function( error ) {
+                console.log(error);
+              });
+      },
+      deleteProgram: function(id){
+        return this.http.delete(this.apiUrl + "classes/" + this.progamsclass + id,
         this.headers)
               .toPromise()
               .then(function( dataresult ) {

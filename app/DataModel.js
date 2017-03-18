@@ -14,13 +14,15 @@
         "years":p.years
       }
     },
-    newYear: function(num = 1){
+    newYear: function(num){
+      if(!num) num = 1;
       return {
         "order": num,
         "courses":[]
       }
     },
-    newCourse: function(id = 1){
+    newCourse: function(id){
+      if(!id) num = 1;
       return {
         "id":id,
         "name":"",

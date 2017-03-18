@@ -8,8 +8,10 @@
     })
     .Class({
       constructor: [
-        function() {
+        app.ClipboardService,
+        function(clipboard) {
           this.delete = new ng.core.EventEmitter();
+          this.clipboard = clipboard;
         }
       ],
       newCourse:function(){
@@ -24,8 +26,15 @@
       deleteAt: function(i){
         this.data.courses.splice(i,1);
       },
-      deleteYear(){
+      deleteYear: function(){
         this.delete.emit(this.data.order-1);
+      },
+      copyToclipboard: function(){
+        this.clipboard.copyYear(this.data);
+      },
+      pasteFromclipboard: function(){
+        var c =this.clipboard.getYear();
+        this.data.courses= c.courses;
       }
 
     });

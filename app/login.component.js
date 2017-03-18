@@ -15,7 +15,7 @@
           this.snackBar = MdSnackBar;
         }
       ],
-      login(){
+      login: function(){
         var me = this;
         this.api.login(this.name, this.pass).then(function(error){
           if(!error){

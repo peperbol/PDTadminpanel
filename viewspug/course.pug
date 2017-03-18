@@ -22,6 +22,10 @@ md-card
           button(md-menu-item, (click)="deleteF()")
             md-icon delete
             span Verwijder
+          button(md-menu-item, (click)="copyToclipboard()")
+            span Kopieer vak
+          button(md-menu-item, (click)="pasteFromclipboard()", *ngIf="clipboard.hasCourse()")
+            span Plak gekopieerd vak
 
   div(*ngIf="open")
     p.periodelabel Periode

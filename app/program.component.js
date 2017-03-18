@@ -3,24 +3,26 @@
     ng.core.Component({
       selector: '.program',
       templateUrl: 'views/program.html',
-      inputs: ["data"]
+      inputs: ["data", "programloader", "cache"]
     })
     .Class({
       constructor: [
         app.ApiService,
         ng.material.MdSnackBar,
+        ng.material.MdSnackBar,
         ng.core.Renderer,
         ng.core.NgZone,
-        function(ApiService,MdSnackBar,renderer, ngZone) {
+        function(ApiService,MdSnackBar,MdDialog,renderer, ngZone) {
           var me= this;
           this.api = ApiService;
           this.snackBar = MdSnackBar;
+          this.dialog = MdDialog;
           this.pageScroll = 0;
           renderer.listenGlobal('window', 'scroll', function(e){ngZone.run(function(){me.onScroll(e)})});
         }
 
       ],
-      onScroll(event){
+      onScroll: function(event){
         this.pageScroll = event.currentTarget.scrollY;
       },
       saveProgram:function(){
@@ -38,7 +40,7 @@
           }
         })
       },
-      removeRequisites(id){
+      removeRequisites: function(id){
         removeFrom = function(arr){
           var i;
           while((i= arr.indexOf(id))>=0){
@@ -57,22 +59,22 @@
       },
       setCache: function(){
         var cache = JSON.stringify(app.Data.copyProgram(this.data));
-        this.cache = cache;
+        this.cache.cache = cache;
       },
       isDirty: function(){
-        if(!this.cache)
+        if(!this.cache.cache)
           this.setCache();
 
         var cache = JSON.stringify(app.Data.copyProgram(this.data));
 
-        return this.cache != cache;
+        return this.cache.cache != cache;
       },
       deleteYearAt: function(i){
 
         this.data.years.slice(i).forEach(function(e){e.order --;});
         this.data.years.splice(i,1);
       },
-      newId(){
+      newId: function(){
         var ids = this.data.years
          .reduce(function(arr,val){return arr.concat(val.courses)},[])
          .map(function(e){return e.id});
@@ -82,8 +84,23 @@
         } while (ids.includes(newId))
         return newId;
       },
-      getCoursesOfYear(i){
+      getCoursesOfYear: function(i){
         return this.data.years[i-1].courses;
+      },
+      deleteProgram: function(){
+          var me = this;
+          this.api.deleteProgram(this.data.objectId).then(function(success){
+            if(success){
+              me.snackBar.open("Deleted "+me.data.program+ ": "+ me.data.graduationprogram,"", {
+                duration: 1500,
+              });
+              me.programloader.deleteProgramFromModel(me.data.objectId);
+            } else{
+              me.snackBar.open("Failed to delete "+me.data.program+ ": "+ me.data.graduationprogram,"", {
+                duration: 3000,
+              });
+            }
+          });
       }
     });
 })(window.app || (window.app = {}));

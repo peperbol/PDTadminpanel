@@ -8,6 +8,10 @@ md-card
         button(md-menu-item, (click)="deleteYear()")
           md-icon delete
           span Verwijder
+        button(md-menu-item, (click)="copyToclipboard()")
+          span Kopieer vakken
+        button(md-menu-item, (click)="pasteFromclipboard()", *ngIf="clipboard.hasYear()")
+          span Plak gekopieerde vakken
   .course(*ngFor="let course of data.courses; let i = index;  let f = first; let l = last",
         [data]="course",[order]="i",[first]="f",[last]="l",(moveUp)="moveUp($event)",(moveDown)="moveDown($event)",(delete)="deleteAt($event)",[lastYear]="lastYear", [program]="program", [yearOrder]="data.order")
   .buttonrow

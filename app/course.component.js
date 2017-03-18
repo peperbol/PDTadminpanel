@@ -7,7 +7,9 @@
       outputs:["moveUp","moveDown", "delete"]
     })
     .Class({
-      constructor: function() {
+      constructor: [
+        app.ClipboardService,
+        function(clipboard) {
         var me = this;
           this.endperiode = 1;
           this.startperiode = 0;
@@ -17,13 +19,14 @@
           this.moveUp = new ng.core.EventEmitter();
           this.moveDown = new ng.core.EventEmitter();
           this.delete = new ng.core.EventEmitter();
-      },
-      ngOnInit(){
+          this.clipboard = clipboard;
+      }],
+      ngOnInit: function(){
 
           this.startperiode= this.data.start-1;
           this.endperiode= 5- (this.data.start+this.data.duration);
       },
-      changeEnd(e){
+      changeEnd: function(e){
         var me = this;
         if(e){
           me.endperiode = 4 - Math.max(1,4-e);
@@ -40,7 +43,7 @@
           });
         }
       },
-      changeStart(e){
+      changeStart: function(e){
         var me = this;
         if(e){
           me.startperiode =   Math.min(e,3);
@@ -62,27 +65,27 @@
         });
         }
       },
-      moveUpF(){
+      moveUpF: function(){
         this.moveUp.emit(this.order);
       },
-      moveDownF(){
+      moveDownF: function(){
         this.moveDown.emit(this.order);
       },
-      deleteF(){
+      deleteF: function(){
         this.program.removeRequisites(this.data.id)
         this.delete.emit(this.order);
       },
-      filterCourses(courses,string){
+      filterCourses: function(courses,string){
         return (string)?courses.filter(function(e){return e.name.toLowerCase().includes(string.toLowerCase())} ): courses;
 
       },
-      filteredPossibleAddableEqualRequisites(){
+      filteredPossibleAddableEqualRequisites: function(){
         return this.filterCourses(this.possibleAddableEqualRequisites(), this.searchEqualRequisites);
       },
-      filteredPossibleAddablePreRequisites(){
+      filteredPossibleAddablePreRequisites: function(){
         return this.filterCourses(this.possibleAddablePreRequisites(), this.searchPreRequisites);
       },
-      possibleEqualRequisites(){
+      possibleEqualRequisites: function(){
 
         var courses = [];
         for (var i = 1; i <= this.yearOrder; i++) {
@@ -91,7 +94,7 @@
         return courses
           .reduce(function(arr,e){return arr.concat(e)},[])
       },
-      possiblePreRequisites(){
+      possiblePreRequisites: function(){
 
         var courses = [];
         for (var i = 1; i < this.yearOrder; i++) {
@@ -100,53 +103,71 @@
         return courses
           .reduce(function(arr,e){return arr.concat(e)},[])
       },
-      possibleAddableEqualRequisites(){
+      possibleAddableEqualRequisites: function(){
         var me = this;
 
         return this.possibleEqualRequisites()
           .filter(function(e){return !me.data.equalrequisites.includes(e.id) && !me.data.prerequisites.includes(e.id)  && me.data.id != e.id});
 
       },
-      possibleAddablePreRequisites(){
+      possibleAddablePreRequisites: function(){
         var me = this;
 
         return this.possiblePreRequisites()
           .filter(function(e){return !me.data.equalrequisites.includes(e.id) && !me.data.prerequisites.includes(e.id)  && me.data.id != e.id});
 
       },
-      getCourseWithName(courses,string){
+      getCourseWithName: function(courses,string){
           var c = courses.filter(function(e){return e.name.toLowerCase() == string.toLowerCase()});
           return (c.length >0)? c[0]: null;
       },
-      getCourseWithId(courses,string){
+      getCourseWithId: function(courses,string){
           var c = courses.filter(function(e){return e.id == string});
           return (c.length >0)? c[0]: null;
       },
-      getEqualRequisite(id){
+      getEqualRequisite: function(id){
         return this.getCourseWithId(this.possibleEqualRequisites(),id)
       },
-      getPreRequisite(id){
+      getPreRequisite: function(id){
         return this.getCourseWithId(this.possiblePreRequisites(),id)
       },
-      getTypedEqualRequisite(){
+      getTypedEqualRequisite: function(){
         return this.getCourseWithName(this.filteredPossibleAddableEqualRequisites(),this.searchEqualRequisites)
       },
-      getTypedPreRequisite(){
+      getTypedPreRequisite: function(){
         return this.getCourseWithName(this.filteredPossibleAddablePreRequisites(),this.searchPreRequisites)
       },
-      addEqualRequisite(){
+      addEqualRequisite: function(){
           this.data.equalrequisites.push(this.getTypedEqualRequisite().id);
           this.searchEqualRequisites = "";
       },
-      addPreRequisite(){
+      addPreRequisite: function(){
           this.data.prerequisites.push(this.getTypedPreRequisite().id);
           this.searchPreRequisites = "";
       },
-      removeEqualRequisite(id){
+      removeEqualRequisite: function(id){
         this.data.equalrequisites.splice(this.data.equalrequisites.indexOf(id),1);
       },
-      removePreRequisite(id){
+      removePreRequisite: function(id){
         this.data.prerequisites.splice(this.data.prerequisites.indexOf(id),1);
+      },
+      copyToclipboard: function(){
+        this.clipboard.copyCourse(this.data);
+      },
+      pasteFromclipboard: function(){
+        var c =this.clipboard.getCourse();
+        this.data.id             = c.id            ;
+        this.data.name           = c.name          ;
+        this.data.prerequisites  = c.prerequisites ;
+        this.data.equalrequisite = c.equalrequisite;
+        this.data.graduationyear = c.graduationyear;
+        this.data.start          = c.start         ;
+        this.data.duration       = c.duration      ;
+        this.data.studypoints    = c.studypoints   ;
+        this.data.pass           = c.pass          ;
+        this.data.dispensation   = c.dispensation  ;
+        this.data.url            = c.url           ;
+
       }
     });
 })(window.app || (window.app = {}));
