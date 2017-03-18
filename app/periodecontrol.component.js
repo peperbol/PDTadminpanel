@@ -3,7 +3,8 @@
     ng.core.Component({
       selector: '.periode',
       templateUrl: 'views/periodecontrol.html',
-      inputs: ["periodestart","periodeduration"]
+      inputs: ["periodestart","periodeduration"],
+      outputs: ["update"]
     })
     .Class({
       constructor: [
@@ -14,6 +15,7 @@
           this.dragingrightHandle = 0;
           this.dragbody = 0;
           this.dragstartPosition = null;
+          this.update = new ng.core.EventEmitter();
         }
       ],
       getTotalWidth:function(){
@@ -56,11 +58,14 @@
         return true;
       },
       dragEnd: function(e){
-        var start = Math.round(this.clampStart(this.getDraggedStart()))
-        var end = Math.round(this.clampDuration(this.getDraggedDuration()))
-        this.periodestart = start ;
+        var start = Math.round(this.clampStart(this.getDraggedStart()));
+        var dur = Math.round(this.clampDuration(this.getDraggedDuration()));
 
-        this.periodeduration = end;
+        this.periodestart = start ;
+        this.periodeduration = dur;
+
+        this.update.emit({periodestart:start,periodeduration:dur });
+
         this.dragingrightHandle = 0;
         this.dragingleftHandle = 0;
         this.dragbody = 0;

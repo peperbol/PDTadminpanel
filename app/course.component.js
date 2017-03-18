@@ -168,6 +168,10 @@
         this.data.dispensation   = c.dispensation  ;
         this.data.url            = c.url           ;
 
+      },
+      setPeriode: function(e){
+        this.data.start =e.periodestart;
+        this.data.duration =e.periodeduration;
       }
     });
 })(window.app || (window.app = {}));
