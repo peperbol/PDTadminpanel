@@ -24,7 +24,6 @@
         this.calcCaches();
       },
       calcCaches: function(){
-        console.log(this.data);
         if(this.data)
         for (var i = 0; i < this.data.length; i++) {
 

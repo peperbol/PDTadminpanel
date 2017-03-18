@@ -1,0 +1,12 @@
+div.startspace([style.width.%]="getStartWidth()")
+div.buttonLeft((dragstart)="dragStart($event)", (dragend)="dragEnd($event)", (drag)="dragLeftHandle($event)")
+  //md-icon grain
+div.mid((dragstart)="dragStart($event)",(dragend)="dragEnd($event)",(drag)="dragBody($event)",)
+div.buttonRight((dragstart)="dragStart($event)",(dragend)="dragEnd($event)",(drag)="dragRightHandle($event)",)
+  //md-icon grain
+div.endspace([style.width.%]="getEndWidth()")
+div.scale
+  div 1
+  div 2
+  div 3
+  div 4

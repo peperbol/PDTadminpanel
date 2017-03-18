@@ -25,13 +25,16 @@ md-card
           button(md-menu-item, (click)="copyToclipboard()")
             span Kopieer vak
           button(md-menu-item, (click)="pasteFromclipboard()", *ngIf="clipboard.hasCourse()")
-            span Plak gekopieerd vak
+            span Plak gekopieerde vakinhoud
 
   div(*ngIf="open")
     p.periodelabel Periode
-    div.periode
+    
+    //div.periode
       md-slider( min="0", max="4", step="1", [ngModel]="startperiode",(ngModelChange)="changeStart($event)").fullwidth
       md-slider( invert min="0", max="4", step="1", [ngModel]="endperiode",(ngModelChange)="changeEnd($event)").fullwidth
+    .periode([periodestart]="data.start", [periodeduration]= "data.duration")
+      
     div
       md-input-container.halfwidth
         md-placeholder Studiepunten
