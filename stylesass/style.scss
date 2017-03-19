@@ -43,6 +43,11 @@
   .program{
     margin-bottom: 30px;
     position: relative;
+    transition: opacity 1s;
+    &.disabled{
+      pointer-events: none;
+      opacity: 0.3;
+    }
     .sidesave{
       position: absolute;
       right: -50px;

@@ -58,7 +58,7 @@ md-card
                 | {{course.name}}
           button(md-raised-button, color="accent" "(click)"="addEqualRequisite()", [disabled]="!getTypedEqualRequisite()") Toevoegen
     div(*ngIf="yearOrder>1").requisites
-      p Volgtijdigheden
+      p Volgtijdelijkheden
       md-chip-list
         md-chip(*ngFor="let courseId of data.prerequisites", (click)="removePreRequisite(courseId)" color="warn") {{getPreRequisite(courseId).name}}
         div
