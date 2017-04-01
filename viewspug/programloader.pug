@@ -17,4 +17,4 @@
 .renameControls.buttonrow(*ngIf="enableRenameControls")
   button(md-raised-button, color="accent" "(click)"="addProgram()" ) Nieuw Programma
   button(md-raised-button, color="accent" "(click)"="rename()", *ngIf="selectedProgram") Hernoem Programma
-.program( *ngIf="selectedProgram", [data]="selectedProgram",[cache]="caches[selectedProgram.objectId]", [programloader]="this")
+.program( *ngIf="selectedProgram", [data]="selectedProgram",[cache]="caches[selectedProgram.objectId]", [programloader]="this",[class.disabled]="enableRenameControls")

@@ -27,8 +27,11 @@
         if(this.data)
         for (var i = 0; i < this.data.length; i++) {
 
-          this.caches[this.data[i].objectId]= {'cache':JSON.stringify(app.Data.copyProgram(this.data[i]))};
+          this.calcCachesE(this.data[i]);
         }
+      },
+      calcCachesE : function(el){
+        this.caches[el.objectId]= {'cache':JSON.stringify(app.Data.copyProgram(el))};
       },
       checkProgram: function(value){
         var me  = this
@@ -63,6 +66,7 @@
           function(id){
             newProgram.objectId = id;
             me.data.push(newProgram);
+            me.calcCachesE(newProgram);
           }
         );
         this.checkProgram();
